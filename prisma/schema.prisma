@@ -12,3 +12,11 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Run {
+   id           Int      @id @default(autoincrement())
+  date         DateTime
+  distance     Float
+  duration     Int
+  averagePace  String
+}
