@@ -14,9 +14,9 @@ datasource db {
 }
 
 model Run {
-   id           Int      @id @default(autoincrement())
-  date         DateTime
-  distance     Float
-  duration     Int
-  averagePace  String
+  id          Int      @id @default(autoincrement())
+  date        DateTime
+  distance    Float
+  duration    Int
+  averagePace String
 }
