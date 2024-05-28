@@ -63,9 +63,10 @@ async function main() {
     });
 
     async function listRuns () {
-        await prisma.run.findMany();
+     await prisma.run.findMany();
         console.log(createRun);
     }
+   
     
 
 }
