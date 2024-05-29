@@ -13,8 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
 model Run {
-  id          Int      @id @default(autoincrement())
+  id          String      @id @default(uuid())
   date        DateTime
   distance    Float
   duration    Int

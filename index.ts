@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 type RunCreateType = {
-    id: number;
+    id: string;
     date: string,
     averagePace: string
     duration: number,
@@ -13,15 +13,18 @@ type RunCreateType = {
 async function createRun(
     data: RunCreateType
 ) {
+    const {id, date} = data
+
     await prisma.run.create({
         data: {
-            id: data.id,
-            date: data.date,
+            id,
+            date,
             distance: data.distance,
             duration: data.duration,
             averagePace: data.averagePace,
         },
     })
+
     console.log(`Run with id ${data.id} was created`)
 }
 
@@ -34,16 +37,20 @@ async function listRuns () {
     const runs =  await prisma.run.findMany();
     console.log(runs);
  }
- async function getRun(id: number) {
+
+ async function getRun(id: string) {
     const run = await prisma.run.findUnique({
         where: { id: id },
     });
     console.log(run);
 }
-async function updateRun(id: number, data: Partial<RunCreateType>) {
+
+async function updateRun(id: string, data: Partial<RunCreateType>) {
     try {
         const updatedRun = await prisma.run.update({
-            where: { id: id },
+            where: { 
+                id: id 
+            },
             data: data,
         });
         console.log(`Run with id ${id} was updated`, updatedRun);
@@ -51,14 +58,15 @@ async function updateRun(id: number, data: Partial<RunCreateType>) {
         console.error(`Failed to update run with id ${id}:`, error);
     }
 }
-    async function deleteRun(id:number) {
+
+    async function deleteRun(id:string) {
         try {
             const deletedRun = await prisma.run.delete ({
                 where:{id:id},
             });
-            console.log(`Run with id ${id} was deleted`,deleteRun);
+            console.log(`Run with id ${id} was deleted`);
         } catch(error) {
-            console.error(`Failed to delete run with id :${id}`,error);
+            console.error(`Failed to delete run with id: ${id}`);
         }
     }
 
@@ -70,8 +78,9 @@ async function updateRun(id: number, data: Partial<RunCreateType>) {
 
 async function main() {
     await reset();
+
     await createRun({
-        id: 1,
+        id: "1",
         date: '2024-01-08T00:00:00Z',
         duration: 1700,
         averagePace: '2:05 km',
@@ -79,7 +88,7 @@ async function main() {
     });
 
     await createRun({
-        id: 2,
+        id: "2",
         date: '2023-05-08T00:00:00Z',
         duration: 1800,
         averagePace: '6:08 km',
@@ -87,17 +96,20 @@ async function main() {
     });
 
     await createRun({
-        id: 3,
+        id: "3",
         date: '2022-05-08T00:00:00Z',
         duration: 1555,
         averagePace: '6:05 km',
         distance: 3.2,
     });
 
-    await listRuns();
-    await getRun(3);
-    await updateRun(1, { duration: 1600, averagePace: '5:30 km' });
-    await deleteRun(2);
+    // await listRuns();
+    // await getRun("1");
+    // await updateRun("1", { duration: 1600, averagePace: '5:30 km' });
+    // await getRun("1");
+    // await deleteRun(11);
+    // await deleteRun(2);
+    // await listRuns();
 }
 
 main()
