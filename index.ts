@@ -30,6 +30,38 @@ async function reset() {
     console.log("All run history deleted")
 }
 
+async function listRuns () {
+    const runs =  await prisma.run.findMany();
+    console.log(runs);
+ }
+ async function getRun(id: number) {
+    const run = await prisma.run.findUnique({
+        where: { id: id },
+    });
+    console.log(run);
+}
+async function updateRun(id: number, data: Partial<RunCreateType>) {
+    try {
+        const updatedRun = await prisma.run.update({
+            where: { id: id },
+            data: data,
+        });
+        console.log(`Run with id ${id} was updated`, updatedRun);
+    } catch (error) {
+        console.error(`Failed to update run with id ${id}:`, error);
+    }
+}
+    async function deleteRun(id:number) {
+        try {
+            const deletedRun = await prisma.run.delete ({
+                where:{id:id},
+            });
+            console.log(`Run with id ${id} was deleted`,deleteRun);
+        } catch(error) {
+            console.error(`Failed to delete run with id :${id}`,error);
+        }
+    }
+
 // createRun(data: RunCreateType)
 // listRuns()
 // getRun(id: string)
@@ -62,13 +94,10 @@ async function main() {
         distance: 3.2,
     });
 
-    async function listRuns () {
-     await prisma.run.findMany();
-        console.log(createRun);
-    }
-   
-    
-
+    await listRuns();
+    await getRun(3);
+    await updateRun(1, { duration: 1600, averagePace: '5:30 km' });
+    await deleteRun(2);
 }
 
 main()
@@ -79,3 +108,5 @@ main()
     .finally(async () => {
         await prisma.$disconnect();
     });
+   
+
