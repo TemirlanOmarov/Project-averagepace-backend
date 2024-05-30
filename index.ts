@@ -79,37 +79,39 @@ async function updateRun(id: string, data: Partial<RunCreateType>) {
 async function main() {
     await reset();
 
-    await createRun({
-        id: "1",
-        date: '2024-01-08T00:00:00Z',
-        duration: 1700,
-        averagePace: '2:05 km',
-        distance: 5,
-    });
+    // // await createRun({
+    // //     id: "1",
+    // //     date: '2024-01-08T00:00:00Z',
+    // //     duration: 1700,
+    // //     averagePace: '2:05 km',
+    // //     distance: 5,
+    // // });
 
-    await createRun({
-        id: "2",
-        date: '2023-05-08T00:00:00Z',
-        duration: 1800,
-        averagePace: '6:08 km',
-        distance: 5.1,
-    });
+    // // await createRun({
+    // //     id: "2",
+    // //     date: '2023-05-08T00:00:00Z',
+    // //     duration: 1800,
+    // //     averagePace: '6:08 km',
+    // //     distance: 5.1,
+    // // });
 
-    await createRun({
-        id: "3",
-        date: '2022-05-08T00:00:00Z',
-        duration: 1555,
-        averagePace: '6:05 km',
-        distance: 3.2,
-    });
+    // // await createRun({
+    // //     id: "3",
+    // //     date: '2022-05-08T00:00:00Z',
+    // //     duration: 1555,
+    // //     averagePace: '6:05 km',
+    // //     distance: 3.2,
+    // // });
 
-    // await listRuns();
+    // // await listRuns();
+    // // await getRun("1");
+    // // await updateRun("1", { duration: 1600, averagePace: '5:30 km' });
+    // // await getRun("1");
+    // // await deleteRun("1");
+    // // await deleteRun("2");
+    // // await listRuns();
     // await getRun("1");
-    // await updateRun("1", { duration: 1600, averagePace: '5:30 km' });
-    // await getRun("1");
-    // await deleteRun(11);
-    // await deleteRun(2);
-    // await listRuns();
+    // await getRun("1000");
 }
 
 main()

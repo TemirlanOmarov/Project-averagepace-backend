@@ -22,5 +22,3 @@ builder.mutationField('createRun', (t) =>
         return newRun;
       }
     }))
-
-  
