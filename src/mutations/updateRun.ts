@@ -11,22 +11,30 @@ builder.mutationField('updateRun', (t) =>
       },
       type: 'Run',
       resolve: async (query, root, args, ctx, info) => {
+        const run = await prisma.run.findUnique({
+            where:{
+                id:args.id
+            }
+        }) 
+        
+        if(!run) {
+            throw new GraphQLError(`Couldn't find id ${args.id} not finded`)
+        }
+
         const updatedRun = await prisma.run.update({
           where: {
             id: args.id
-          },
+          }
+          ,
           data: {
+            id: args.id,
             date: args.date,
             distance: args.distance,
             duration: args.duration,
             averagePace: args.averagePace,
           },
         });
-
-        if (!updatedRun) {
-          throw new GraphQLError(`Update with id '${args.id}' not updated`);
-        }
-        
+    
         return updatedRun;
       }
     })

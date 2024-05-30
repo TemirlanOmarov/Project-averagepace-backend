@@ -7,15 +7,21 @@ builder.mutationField('deleteRun', (t) =>
       },
       type: 'Run',
       resolve: async (query, root, args, ctx, info) => {
-        const deletedRun = await prisma.run.delete({
+        const run = await prisma.run.findUnique({
           where: {
             id: args.id}
         });
+        if (!run) {
+            throw new GraphQLError(`delete with id '${args.id}' not deleted`);
+          }
+         
+        const deletedRun = await prisma.run.delete({
+            where: {
+              id: args.id}
+          });
+        console.log(deletedRun)
 
-        if (!deletedRun) {
-          throw new GraphQLError(`delete with id '${args.id}' not deleted`);
-        }
-        
+       
         return deletedRun;
       }
     })
