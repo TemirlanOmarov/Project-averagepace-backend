@@ -1,4 +1,5 @@
 import { builder } from "../builder";
+import {formatISO} from 'date-fns'
 
 builder.prismaObject('Run', {
     fields: (t) => ({
@@ -6,18 +7,18 @@ builder.prismaObject('Run', {
       date: t.field({
           type: "String",
           resolve: (parent) => {
-              return  parent.date.toString()
+              return  formatISO(parent.date, { representation: 'date'})
           }
       }),
       distance: t.exposeFloat('distance'),
       duration: t.exposeInt('duration'),
       averagePace: t.exposeString('averagePace'),
-      egg: t.field({
-        type: 'Int',
-        resolve: () => {
-          return 1000
-        }
-      })
+      // egg: t.field({
+      //   type: 'Int',
+      //   resolve: () => {
+      //     return 1000
+      //   }
+      // })
     }),
   });
   
