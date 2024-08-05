@@ -7,7 +7,6 @@ builder.mutationField('updateRun', (t) =>
         date: t.arg.string({ required: true }),
         distance: t.arg.float({ required: true }),
         duration: t.arg.int({ required: true }),
-        averagePace: t.arg.string({ required: true }),
       },
       type: 'Run',
       resolve: async (query, root, args, ctx, info) => {
@@ -31,7 +30,6 @@ builder.mutationField('updateRun', (t) =>
             date: args.date,
             distance: args.distance,
             duration: args.duration,
-            averagePace: args.averagePace,
           },
         });
     

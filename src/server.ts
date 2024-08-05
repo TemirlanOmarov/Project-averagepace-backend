@@ -9,5 +9,5 @@ const yoga = createYoga({
 const server = createServer(yoga);
 
 server.listen(3000, () => {
-  console.log('Visit http://localhost:3000/graphql');
+  console.log('Visit http://localhost:30n00/graphql');
 });

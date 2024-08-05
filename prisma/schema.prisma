@@ -22,5 +22,5 @@ model Run {
   date        DateTime
   distance    Float
   duration    Int
-  averagePace String
+
 }
